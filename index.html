@@ -6,11 +6,97 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
     <title>jzevin | Three.js experiments</title>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: #222;
+        margin: 0;
+        color: #ccc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      a {
+        text-decoration: none;
+        color: dodgerblue;
+      }
+      .app {
+        display: flex;
+        height: 100%;
+      }
+      .left {
+        border-right: 1px solid #333;
+      }
+      .right {
+        flex: 1 1 auto;
+        height: 100%;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+      .title {
+        font-size: 1em;
+        background: #111;
+        padding: 1em;
+        margin: 0;
+      }
+      .experiments {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .experiment {
+        border-bottom: 1px solid #111;
+        border-top: 1px solid #333;
+        padding: 0.25em 0.5em;
+      }
+      .experiment.active {
+        background: #333;
+      }
+    </style>
   </head>
   <body>
-    <h1>Experiments</h1>
-    <ol>
-      <li><a href="grid-walker/dist/">grid-walker</a></li>
-    </ol>
+    <div class="app">
+      <div class="left">
+        <h1 class="title">Experiments</h1>
+        <ol class="experiments"> </ol>
+      </div>
+      <div class="right">
+        <iframe src="/grid-walker/dist/index.htmls" frameborder="0"> </iframe
+      ></div>
+    </div>
+    <script>
+      const experiments = [{ name: 'grid-walker', path: 'grid-walker/dist/' }],
+        experimentsEl = document.querySelector('.experiments'),
+        iframeEl = document.querySelector('iframe');
+      function setActive() {
+        experimentsEl.querySelectorAll('.experiment').forEach((exp) => {
+          if (exp.querySelector('a').href === iframeEl.src) {
+            exp.classList.add('active');
+          } else {
+            exp.classList.remove('active');
+          }
+        });
+      }
+      experiments.forEach((exp) => {
+        experimentsEl.insertAdjacentHTML(
+          'beforeend',
+          `<li class="experiment"
+            ><a href="${exp.path}">${exp.name}</a></li
+          >`
+        );
+      });
+      experimentsEl.addEventListener('click', (e) => {
+        e.preventDefault();
+        iframeEl.src = e.target.href;
+        setActive();
+      });
+      experimentsEl.querySelector('li a').click();
+    </script>
   </body>
 </html>
