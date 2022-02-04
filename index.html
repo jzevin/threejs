@@ -71,7 +71,10 @@
       ></div>
     </div>
     <script>
-      const experiments = [{ name: 'grid-walker', path: 'grid-walker/dist/' }],
+      const experiments = [
+          { name: 'grid-walker', path: 'grid-walker/dist/' },
+          { name: 'sprite-tests', path: 'sprites-test/dist/' },
+        ],
         experimentsEl = document.querySelector('.experiments'),
         iframeEl = document.querySelector('iframe');
       function setActive() {

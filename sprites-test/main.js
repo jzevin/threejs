@@ -1,6 +1,8 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import bactImg from './sprites/bact.png';
+import circ1Img from './sprites/Circ001.png';
 
 const { randFloat, randInt } = THREE.MathUtils;
 
@@ -58,8 +60,8 @@ point1.position.set(10, 20, 5);
 scene.add(ambientLight, point1);
 
 const maps = {
-  circ1: new THREE.TextureLoader().load('sprites/Circ001.png'),
-  bact: new THREE.TextureLoader().load('sprites/bact.png'),
+  circ1: new THREE.TextureLoader().load(circ1Img),
+  bact: new THREE.TextureLoader().load(bactImg),
 };
 
 const spriteMats = {
