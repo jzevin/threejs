@@ -53,16 +53,31 @@
         border-bottom: 1px solid #111;
         border-top: 1px solid #333;
         padding: 0.25em 0.5em;
+        display: inline-flex;
+        align-items: center;
       }
       .experiment.active {
         background: #333;
+      }
+      .actions {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding-left: 0.5em;
+      }
+      .actions img {
+        height: 0.75em;
+        padding-left: 0.5em;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
     <div class="app">
       <div class="left">
-        <h1 class="title">Experiments</h1>
+        <h1 class="title">THREE.js Experiments</h1>
         <ol class="experiments"></ol>
       </div>
       <div class="right">
@@ -71,15 +86,17 @@
     </div>
     <script>
       const experiments = [
-          { name: 'grid-walker', path: 'grid-walker/dist/' },
-          { name: 'sprites-test', path: 'sprites-test/dist/' },
+          { name: 'grid-walker', displayName: 'grid walker', path: 'dist/' },
+          { name: 'sprites-test', displayName: 'sprites test', path: 'dist/' },
           {
-            name: 'GTLF-import-test',
-            path: 'import-GTLF-test-scene-exp-from-blender/dist/',
+            name: 'import-GTLF-test-scene-exp-from-blender',
+            displayName: 'GTLF import test',
+            path: 'dist/',
           },
           {
-            name: 'bot-test',
-            path: 'bot-movement-test/dist/',
+            name: 'bot-movement-test',
+            displayName: 'bot test',
+            path: 'dist/',
           },
         ],
         experimentsEl = document.querySelector('.experiments'),
@@ -97,11 +114,21 @@
         experimentsEl.insertAdjacentHTML(
           'beforeend',
           `<li class="experiment"
-            ><a href="${exp.path}">${exp.name}</a></li
+            >
+              <a href="${exp.name}/${exp.path}">${exp.displayName}</a>
+              <div class="actions">
+                <img src="icon-full-link.svg" data-type="full" data-path="${exp.name}/${exp.path}">
+                <img src="icon-code.svg" data-type="full" data-path="https://github.com/jzevin/threejs/tree/master/${exp.name}">
+              </div>
+              </li
           >`
         );
       });
       experimentsEl.addEventListener('click', (e) => {
+        console.log(e.target);
+        if (e.target.tagName === 'IMG') {
+          window.open(e.target.dataset.path, '_blank');
+        }
         if (!e.target.href) return;
         e.preventDefault();
         iframeEl.src = e.target.href;
