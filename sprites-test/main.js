@@ -38,13 +38,13 @@ function render() {
 function animate() {
   window.requestAnimationFrame(animate);
   controls.update();
-  // walkers.forEach((w) => w.update());
-  circles.forEach((c) => {
+  for (let i = 0; i < circles.length; i++) {
+    const c = circles[i],
+      b = bacts[i];
     c.position.z += randFloat(-0.025, 0.025);
-  });
-  bacts.forEach((b) => {
-    b.position.z += randFloat(-0.025, 0.025);
-  });
+    if (b) b.position.z += randFloat(-0.025, 0.025);
+  }
+  scene.rotation.y += 0.003;
   render();
 }
 
