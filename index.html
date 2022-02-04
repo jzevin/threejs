@@ -63,16 +63,24 @@
     <div class="app">
       <div class="left">
         <h1 class="title">Experiments</h1>
-        <ol class="experiments"> </ol>
+        <ol class="experiments"></ol>
       </div>
       <div class="right">
-        <iframe src="/grid-walker/dist/index.htmls" frameborder="0"> </iframe
-      ></div>
+        <iframe src="/grid-walker/dist/index.htmls" frameborder="0"> </iframe>
+      </div>
     </div>
     <script>
       const experiments = [
           { name: 'grid-walker', path: 'grid-walker/dist/' },
           { name: 'sprites-test', path: 'sprites-test/dist/' },
+          {
+            name: 'GTLF-import-test',
+            path: 'import-GTLF-test-scene-exp-from-blender/dist/',
+          },
+          {
+            name: 'bot-test',
+            path: 'bot-movement-test/dist/',
+          },
         ],
         experimentsEl = document.querySelector('.experiments'),
         iframeEl = document.querySelector('iframe');
