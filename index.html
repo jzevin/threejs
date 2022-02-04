@@ -94,6 +94,7 @@
         );
       });
       experimentsEl.addEventListener('click', (e) => {
+        if (!e.target.href) return;
         e.preventDefault();
         iframeEl.src = e.target.href;
         setActive();
